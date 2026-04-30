@@ -540,7 +540,7 @@ body {
 .edu-right { text-align: right; }
 .edu-cgpa { font-size: 1.8rem; font-weight: 800; color: var(--accent); font-family: var(--font-mono); line-height: 1; text-shadow: 0 0 20px rgba(56,189,248,0.25); }
 .edu-cgpa span { font-size: 0.78rem; color: #3d5470; }
-.edu-year { font-size: 0.72rem; color: #3d5470; font-family: var(--font-mono); margin-top: 0.3rem; }
+.edu-year { font-size: 1.1rem; font-weight: 700; color: var(--accent); font-family: var(--font-mono); margin-top: 0.3rem; text-shadow: 0 0 14px rgba(56,189,248,0.2); }
 
 /* --- SECTION HEADING --- */
 .section-heading { margin-bottom: 2rem; }
@@ -697,6 +697,10 @@ body {
 @media (max-width: 768px) {
     body { cursor: auto; }
     #cursor-dot, #cursor-ring { display: none; }
+    /* Fix cursor: none on interactive elements for touch devices */
+    a, button, .nav-link, .project-link-btn, .gallery-toggle,
+    .social-link, .cert-card, .exp-card, .skill-card,
+    .gallery-item, .lightbox-close { cursor: auto; }
     .container { flex-direction: column; }
     .nav-rail { width: 100%; min-height: auto; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem; }
     .nav-links { flex-direction: row; flex-wrap: wrap; }
@@ -709,6 +713,8 @@ body {
     .skills-grid, .certs-grid { grid-template-columns: 1fr; }
     .exp-header { flex-direction: column; gap: 0.4rem; }
     .exp-period { text-align: left; margin-left: 0; }
+    .edu-card { flex-direction: column; gap: 0.5rem; }
+    .edu-right { text-align: left; }
 }
 
 /* --- PROJECT LINKS --- */

@@ -44,12 +44,6 @@ const EXPERIENCES = [
         skills: "Learning text and keyframe animations using After Effects and Premiere Pro. Representing the lab at external company project expos and industry showcases.",
     },
     {
-        role: "Internship Trainee",
-        org: "Comedkares",
-        period: "Oct 2024 – Jan 2025",
-        skills: "Working with industry-standard tools including OnShape for 3D modelling and Figma for UI/UX prototyping.",
-    },
-    {
         role: "Student Volunteer",
         org: "Youth For Seva",
         period: "Nov 2025 – Present",
