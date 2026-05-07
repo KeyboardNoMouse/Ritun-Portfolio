@@ -14,6 +14,22 @@
 </head>
 <body>
 
+    <!-- Ambient canvas -->
+    <canvas id="ambient-canvas" style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.6"></canvas>
+
+    <!-- Back to top -->
+    <button id="back-to-top" title="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <!-- Mobile top bar -->
+    <div id="mobile-topbar">
+        <div class="mobile-topbar-title">PASSPORT <span>// Ritun Jain</span></div>
+        <button id="mobile-menu-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+    </div>
+
     <!-- Custom Cursor -->
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
@@ -115,6 +131,7 @@
                     <div class="nav-build-info">
                         BUILD <span>2026.04</span> · STABLE
                     </div>
+                    <div class="nav-shortcuts">Press <kbd>1</kbd>–<kbd>5</kbd> to navigate</div>
                 </div>
             </nav>
 
@@ -135,7 +152,7 @@
                             </div>
                         </div>
                         <div class="identity-info">
-                            <h1 class="identity-name" data-text="Ritun Jain">Ritun Jain</h1>
+                            <h1 class="identity-name" data-text="Ritun Jain"><span id="identity-name-typed">Ritun Jain</span><span class="name-cursor">_</span></h1>
                             <p class="identity-description">
                                 Full-stack developer &amp; AI/ML engineer in training. Building Websites,
                                 Discord bots, and AI integrations — one commit at a time.
@@ -297,6 +314,7 @@
                                 </svg>
                             </div>
                         </a>
+                        <div class="social-link-wrapper">
                         <a href="mailto:ritunjain246@gmail.com" class="social-link">
                             <div class="social-link-left">
                                 <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -313,6 +331,10 @@
                                 </svg>
                             </div>
                         </a>
+                        <button id="copy-email-btn" class="copy-email-btn" onclick="copyEmail()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            Copy Email
+                        </button>
                     </div>
                     <div class="protocol-section">
                         <div class="protocol-label">Protocol</div>
