@@ -39,23 +39,38 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     background: var(--accent);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    /* transform is set entirely by JS — no left/top changes = no reflow */
     will-change: transform;
-    box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent-glow);
+    /* NO box-shadow here — box-shadow on a moving element causes a repaint every frame.
+       NO transition here — any transition adds perceived lag to cursor position. */
 }
-
-#cursor-ring {
-    display: none;
+/* Glow lives on ::after so it composites separately and doesn't repaint on move */
+#cursor-dot::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    opacity: 0.5;
+    pointer-events: none;
 }
-
-
-
-/* --- CRT SCANLINES --- */
+.cursor-hover #cursor-dot {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    /* Only transition size/appearance, NOT transform — transform must stay instant */
+    transition: width 0.12s ease, height 0.12s ease, background 0.12s ease, border 0.12s ease;
+}
+/* Undo transition when not hovering so it snaps back cleanly */
+#cursor-dot:not(.cursor-hover #cursor-dot) {
+    transition: width 0.12s ease, height 0.12s ease, background 0.12s ease, border 0.12s ease;
+}
 #crt {
     position: fixed; inset: 0;
     pointer-events: none;
@@ -362,17 +377,7 @@ body {
 /* --- MAIN CONTENT --- */
 .main-content { flex: 1; padding: 3rem 4rem; overflow-y: auto; contain: layout style; }
 
-/* cursor-hover: scale the dot via a separate transition so it doesn't interfere with position */
-#cursor-dot {
-    transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
-}
-.cursor-hover #cursor-dot {
-    width: 20px;
-    height: 20px;
-    background: transparent;
-    border: 1.5px solid var(--accent);
-    box-shadow: 0 0 10px var(--accent-glow);
-}
+
 
 .view { display: none; }
 .view.active {
