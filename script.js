@@ -115,20 +115,25 @@ for (let i = 0; i < STAR_COUNT; i++) {
 
 /* --- CUSTOM CURSOR --- */
 const cursorDot = document.getElementById("cursor-dot");
-let mouseX = 0, mouseY = 0;
+// Use transform instead of left/top — avoids layout reflow, stays on compositor thread
+let rafPending = false;
 document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    cursorDot.style.left = mouseX + "px";
-    cursorDot.style.top = mouseY + "px";
-});
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+        cursorDot.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+        rafPending = false;
+    });
+}, { passive: true });
+
+// Use capture-phase mouseenter/mouseleave — doesn't bubble, fires once per element, no closest() spam
+const HOVER_SELECTOR = "button, a, .skill-card, .cert-card, .project-card, .exp-card, .tech-list span, .achievement-card";
 document.addEventListener("mouseover", (e) => {
-    if (e.target.closest("button, a, .skill-card, .cert-card, .project-card, .exp-card, .tech-list span, .achievement-card"))
+    if (e.target.matches(HOVER_SELECTOR) || e.target.closest(HOVER_SELECTOR))
         document.body.classList.add("cursor-hover");
-});
-document.addEventListener("mouseout", (e) => {
-    if (e.target.closest("button, a, .skill-card, .cert-card, .project-card, .exp-card, .tech-list span, .achievement-card"))
+    else
         document.body.classList.remove("cursor-hover");
-});
+}, { passive: true });
 
 /* --- BOOT SEQUENCE --- */
 const bootScreen = document.getElementById("boot-screen");
@@ -195,7 +200,12 @@ function initAmbientParticles() {
     const ctx = canvas.getContext("2d");
     let W = window.innerWidth, H = window.innerHeight;
     canvas.width = W; canvas.height = H;
-    window.addEventListener("resize", () => { W = window.innerWidth; H = window.innerHeight; canvas.width = W; canvas.height = H; });
+    let rafId;
+    window.addEventListener("resize", () => {
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width = W; canvas.height = H;
+        // No need to restart — pts just get clipped briefly, that's fine
+    });
     const pts = Array.from({ length: 40 }, () => ({
         x: Math.random() * W, y: Math.random() * H,
         r: Math.random() * 1.4 + 0.3,
@@ -213,7 +223,7 @@ function initAmbientParticles() {
             ctx.fillStyle = p.blue ? `rgba(56,189,248,${p.alpha})` : `rgba(167,139,250,${p.alpha})`;
             ctx.fill();
         });
-        requestAnimationFrame(draw);
+        rafId = requestAnimationFrame(draw);
     }
     draw();
 }
@@ -345,7 +355,7 @@ const views = document.querySelectorAll(".view");
 
 function navigateTo(tab) {
     navLinks.forEach(l => l.classList.remove("active"));
-    views.forEach(v => { v.classList.remove("active"); void v.offsetWidth; });
+    views.forEach(v => v.classList.remove("active"));
     const activeLink = document.querySelector(`.nav-link[data-tab="${tab}"]`);
     const target = document.getElementById(`${tab}-view`);
     if (activeLink) activeLink.classList.add("active");

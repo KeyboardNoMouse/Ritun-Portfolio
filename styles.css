@@ -37,12 +37,15 @@ body {
 /* --- CUSTOM CURSOR --- */
 #cursor-dot {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 8px; height: 8px;
     background: var(--accent);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    transform: translate(-50%,-50%);
+    /* transform is set entirely by JS — no left/top changes = no reflow */
+    will-change: transform;
     box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent-glow);
 }
 
@@ -357,7 +360,19 @@ body {
 .nav-build-info span { color: var(--green); }
 
 /* --- MAIN CONTENT --- */
-.main-content { flex: 1; padding: 3rem 4rem; overflow-y: auto; }
+.main-content { flex: 1; padding: 3rem 4rem; overflow-y: auto; contain: layout style; }
+
+/* cursor-hover: scale the dot via a separate transition so it doesn't interfere with position */
+#cursor-dot {
+    transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.cursor-hover #cursor-dot {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
 
 .view { display: none; }
 .view.active {
@@ -483,7 +498,7 @@ body {
 
 .skill-card {
     border: 1px solid var(--border); padding: 1.1rem; border-radius: 8px;
-    transition: all 0.3s ease; background: var(--card);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; background: var(--card);
     backdrop-filter: blur(6px); position: relative; overflow: hidden;
 }
 .skill-card::after {
@@ -840,7 +855,7 @@ body {
     border-radius: 4px;
     text-decoration: none;
     letter-spacing: 0.06em;
-    transition: all 0.22s ease;
+    transition: color 0.22s ease, border-color 0.22s ease, background 0.22s ease;
     border: 1px solid;
     cursor: none;
 }
@@ -884,7 +899,7 @@ body {
     border-radius: 4px;
     padding: 0.38rem 0.85rem;
     cursor: none;
-    transition: all 0.22s ease;
+    transition: color 0.22s ease, border-color 0.22s ease, background 0.22s ease;
     letter-spacing: 0.06em;
     white-space: nowrap;
 }
@@ -931,7 +946,7 @@ body {
     border-radius: 6px;
     overflow: hidden;
     cursor: none;
-    transition: all 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     aspect-ratio: 16/10;
     background: rgba(0,0,0,0.4);
@@ -965,7 +980,7 @@ body {
     letter-spacing: 0.06em;
     opacity: 0;
     transform: translateY(4px);
-    transition: all 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .gallery-item:hover .gallery-caption {
     opacity: 1;
