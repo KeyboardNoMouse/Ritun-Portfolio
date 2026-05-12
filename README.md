@@ -109,18 +109,4 @@ Colors and fonts are CSS variables at the top of `styles.css`:
   ...
 }
 ```
-
----
-
-## 📬 Contact
-
-**Ritun Jain** — BE · AI & ML · NIE Mysuru · 2028
-
-- LinkedIn: [ritun-jain-23b683309](https://www.linkedin.com/in/ritun-jain-23b683309/)
-- GitHub: [@KeyboardNoMouse](https://github.com/KeyboardNoMouse)
-- Instagram: [@_ritun_07](https://instagram.com/_ritun_07/)
-- Email: ritunjain246@gmail.com
-
----
-
 *Built with zero frameworks and too much caffeine.*
