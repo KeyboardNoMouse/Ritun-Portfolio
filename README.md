@@ -55,37 +55,6 @@
 
 ---
 
-## 🚀 Projects Showcased
-
-### 🏆 Karnataka Biosecurity Network *(SparkVerse+ 2026 Winner)*
-A full-stack community-driven biosecurity management platform for Karnataka, connecting farmers, veterinarians, district heads, and state authorities for rapid livestock disease response. Integrated Google Gemini AI for on-the-spot diagnostic suggestions.
-`Python` `Flask` `SQLAlchemy` `Google Gemini API` `Bootstrap 5` `Chart.js` `Leaflet Maps`
-
-### NVMe Drive Failure Predictor & Fleet Dashboard
-AI-powered telemetry analysis engine predicting NVMe drive failures using Random Forest and SMOTE, with a full-stack web dashboard for fleet monitoring.
-`Python` `Machine Learning` `Data Science` `Telemetry`
-
-### Sky — AI Discord Chatbot
-Custom Discord bot with real-time NLP responses powered by the Google Gemini API.
-`Python` `Google Gemini API` `Discord.py` `NLP`
-
----
-
-## 🏅 Achievements
-
-- **🥇 1st Place — SparkVerse+ 2026**, MIT Mysore · Team AdaptX *(May 2026)*
-
----
-
-## 📜 Certifications
-
-- Front-End Development — *Meta · Coursera*
-- Python Data Structures — *University of Michigan · Coursera*
-- AI For Everyone — *DeepLearning.AI · Coursera*
-- Prompt Engineering Basics — *IBM · Coursera*
-
----
-
 ## 🛠️ How to Run Locally
 
 No build step required. Just open `index.html` in a browser:
