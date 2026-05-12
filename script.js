@@ -183,10 +183,11 @@ bootIdle.addEventListener("click", () => {
                 bootScreen.style.transition = "opacity 0.6s ease";
                 setTimeout(() => {
                     bootScreen.classList.add("hidden");
+                    starsContainer.innerHTML = ""; // free the 80 star nodes
                     mainApp.classList.remove("hidden");
-                    initAmbientParticles();
-                    initScrollReveal();
-                    setTimeout(initTypewriter, 500);
+                    setTimeout(initAmbientParticles, 100);
+                    setTimeout(initScrollReveal, 150);
+                    setTimeout(initTypewriter, 600);
                 }, 600);
             }, 350);
         }
@@ -200,7 +201,6 @@ function initAmbientParticles() {
     const ctx = canvas.getContext("2d");
     let W = window.innerWidth, H = window.innerHeight;
     canvas.width = W; canvas.height = H;
-    let rafId;
     window.addEventListener("resize", () => {
         W = window.innerWidth; H = window.innerHeight;
         canvas.width = W; canvas.height = H;
@@ -212,7 +212,12 @@ function initAmbientParticles() {
         vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
         blue: Math.random() > 0.5, alpha: Math.random() * 0.3 + 0.05,
     }));
-    function draw() {
+    const FRAME_INTERVAL = 1000 / 20; // cap at 20fps — plenty for slow particles
+    let last = 0;
+    function draw(ts) {
+        if (document.hidden) { requestAnimationFrame(draw); return; }
+        if (ts - last < FRAME_INTERVAL) { requestAnimationFrame(draw); return; }
+        last = ts;
         ctx.clearRect(0, 0, W, H);
         pts.forEach(p => {
             p.x += p.vx; p.y += p.vy;
@@ -223,9 +228,9 @@ function initAmbientParticles() {
             ctx.fillStyle = p.blue ? `rgba(56,189,248,${p.alpha})` : `rgba(167,139,250,${p.alpha})`;
             ctx.fill();
         });
-        rafId = requestAnimationFrame(draw);
+        requestAnimationFrame(draw);
     }
-    draw();
+    requestAnimationFrame(draw);
 }
 
 /* --- SCROLL REVEAL --- */
