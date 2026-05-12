@@ -6,7 +6,7 @@ const PROJECTS = [
         date: "May 2026",
         status: "WINNER",
         statusClass: "s-winner",
-        desc: "A full-stack biosecurity management platform connecting farmers, veterinarians, district heads, and state officials across Karnataka for rapid livestock disease response. Built for SparkVerse+ 2026 at MIT Mysore by Team AdaptX — awarded 1st place. Features AI-powered emergency triage via Gemini API, real-time incident reporting with image upload, multilingual dashboards (English + Kannada), vaccination tracking, and a risk-zone map across 15 Karnataka districts.",
+        desc: "A full-stack biosecurity management platform connecting farmers, veterinarians, district heads, and state officials across Karnataka for rapid livestock disease response.",
         tags: ["Python", "Flask", "SQLAlchemy", "Google Gemini API", "Bootstrap 5", "Chart.js", "Leaflet Maps"],
         github: null,
         demo: null,
