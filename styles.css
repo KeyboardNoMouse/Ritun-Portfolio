@@ -58,6 +58,7 @@ body {
     background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
     opacity: 0.5;
     pointer-events: none;
+    will-change: opacity;
 }
 .cursor-hover #cursor-dot {
     width: 20px;

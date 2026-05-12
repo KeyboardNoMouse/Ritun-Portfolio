@@ -117,22 +117,27 @@ for (let i = 0; i < STAR_COUNT; i++) {
 const cursorDot = document.getElementById("cursor-dot");
 // Use transform instead of left/top — avoids layout reflow, stays on compositor thread
 let rafPending = false;
+let mouseX = 0, mouseY = 0;
 document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
     if (rafPending) return;
     rafPending = true;
     requestAnimationFrame(() => {
-        cursorDot.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+        // translate(-50%,-50%) keeps dot centered at cursor for both 8px and 20px hover sizes
+        cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
         rafPending = false;
     });
 }, { passive: true });
 
-// Use capture-phase mouseenter/mouseleave — doesn't bubble, fires once per element, no closest() spam
+// Use pointerover and only toggle classList when state actually changes — skips redundant style recalcs
 const HOVER_SELECTOR = "button, a, .skill-card, .cert-card, .project-card, .exp-card, .tech-list span, .achievement-card";
-document.addEventListener("mouseover", (e) => {
-    if (e.target.matches(HOVER_SELECTOR) || e.target.closest(HOVER_SELECTOR))
-        document.body.classList.add("cursor-hover");
-    else
-        document.body.classList.remove("cursor-hover");
+let cursorHovered = false;
+document.addEventListener("pointerover", (e) => {
+    const isHover = !!(e.target.matches(HOVER_SELECTOR) || e.target.closest(HOVER_SELECTOR));
+    if (isHover === cursorHovered) return; // no change — skip classList mutation
+    cursorHovered = isHover;
+    document.body.classList.toggle("cursor-hover", isHover);
 }, { passive: true });
 
 /* --- BOOT SEQUENCE --- */
