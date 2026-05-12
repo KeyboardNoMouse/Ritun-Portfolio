@@ -1,6 +1,24 @@
 /* --- DATA --- */
 const PROJECTS = [
     {
+        title: "Karnataka Biosecurity Network",
+        subtitle: "Community-Driven Disease Response Platform",
+        date: "May 2026",
+        status: "WINNER",
+        statusClass: "s-winner",
+        desc: "A full-stack biosecurity management platform connecting farmers, veterinarians, district heads, and state officials across Karnataka for rapid livestock disease response. Built for SparkVerse+ 2026 at MIT Mysore by Team AdaptX — awarded 1st place. Features AI-powered emergency triage via Gemini API, real-time incident reporting with image upload, multilingual dashboards (English + Kannada), vaccination tracking, and a risk-zone map across 15 Karnataka districts.",
+        tags: ["Python", "Flask", "SQLAlchemy", "Google Gemini API", "Bootstrap 5", "Chart.js", "Leaflet Maps"],
+        github: null,
+        demo: null,
+        images: [
+            { src: "images/biosecurity/landing.png", caption: "Landing Page" },
+            { src: "images/biosecurity/state_dashboard.png", caption: "State Head Dashboard" },
+            { src: "images/biosecurity/district_dashboard.png", caption: "District Dashboard" },
+            { src: "images/biosecurity/farmer_dashboard.png", caption: "Farmer Dashboard" },
+            { src: "images/biosecurity/incident.jpg", caption: "Emergency Incident Report" },
+        ],
+    },
+    {
         title: "NVMe Drive Failure Predictor & Fleet Dashboard",
         subtitle: "Predictive Maintenance System",
         date: "Mar 2026",
@@ -58,6 +76,17 @@ const CERTS = [
     { issuer: "IBM · COURSERA", name: "Prompt Engineering Basics", link: null },
 ];
 
+const ACHIEVEMENTS = [
+    {
+        title: "Winner — SparkVerse+ 2026",
+        org: "MIT Mysore",
+        date: "May 2026",
+        desc: "1st place at SparkVerse+ 2026, a hackathon hosted by MIT Mysore. Built Karnataka Biosecurity Network — a full-stack AI-powered disease response platform connecting farmers, vets, and government officials across Karnataka.",
+        team: "Team AdaptX",
+        badge: "🏆",
+    },
+];
+
 const BOOT_LOG = [
     "KERNEL 6.4.2-ritun loaded",
     "CPU: 8-core · RAM: 16GB OK",
@@ -92,11 +121,11 @@ document.addEventListener("mousemove", (e) => {
     cursorDot.style.top = mouseY + "px";
 });
 document.addEventListener("mouseover", (e) => {
-    if (e.target.closest("button, a, .skill-card, .cert-card, .project-card, .exp-card, .tech-list span"))
+    if (e.target.closest("button, a, .skill-card, .cert-card, .project-card, .exp-card, .tech-list span, .achievement-card"))
         document.body.classList.add("cursor-hover");
 });
 document.addEventListener("mouseout", (e) => {
-    if (e.target.closest("button, a, .skill-card, .cert-card, .project-card, .exp-card, .tech-list span"))
+    if (e.target.closest("button, a, .skill-card, .cert-card, .project-card, .exp-card, .tech-list span, .achievement-card"))
         document.body.classList.remove("cursor-hover");
 });
 
@@ -193,7 +222,7 @@ function initScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("revealed"); observer.unobserve(e.target); } });
     }, { threshold: 0.07 });
-    document.querySelectorAll(".project-card, .cert-card, .exp-card, .social-link").forEach(el => {
+    document.querySelectorAll(".project-card, .cert-card, .exp-card, .social-link, .achievement-card").forEach(el => {
         el.classList.add("reveal-target");
         observer.observe(el);
     });
@@ -281,6 +310,23 @@ if (expListEl) {
         <div class="exp-card">
             <div class="exp-header"><div><div class="exp-role">${e.role}</div><div class="exp-org">${e.org}</div></div><div class="exp-period">${e.period}</div></div>
             <div class="exp-skills">${e.skills}</div>
+        </div>`).join("");
+}
+
+/* --- ACHIEVEMENTS --- */
+const achievementsListEl = document.getElementById("achievements-list");
+if (achievementsListEl) {
+    achievementsListEl.innerHTML = ACHIEVEMENTS.map((a, i) => `
+        <div class="achievement-card">
+            <div class="achievement-badge">${a.badge}</div>
+            <div class="achievement-content">
+                <div class="achievement-header">
+                    <div class="achievement-title">${a.title}</div>
+                    <div class="achievement-date">${a.date}</div>
+                </div>
+                <div class="achievement-meta">${a.org} &nbsp;·&nbsp; <span class="achievement-team">${a.team}</span></div>
+                <div class="achievement-desc">${a.desc}</div>
+            </div>
         </div>`).join("");
 }
 
