@@ -15,7 +15,6 @@ const PROJECTS = [
             { src: "images/biosecurity/state_dashboard.png", caption: "State Head Dashboard" },
             { src: "images/biosecurity/district_dashboard.png", caption: "District Dashboard" },
             { src: "images/biosecurity/farmer_dashboard.png", caption: "Farmer Dashboard" },
-            { src: "images/biosecurity/incident.jpg", caption: "Emergency Incident Report" },
         ],
     },
     {
