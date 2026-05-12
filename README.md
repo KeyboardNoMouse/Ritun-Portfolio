@@ -2,7 +2,7 @@
 
 > **PASSPORT** — A terminal-inspired personal portfolio built with vanilla HTML, CSS, and JavaScript. No frameworks, no dependencies, just clean code and a lot of attention to detail.
 
-🔗 **Live Site:** [ritunjain.dev](https://ritunjain.dev) *(or your GitHub Pages URL)*
+🔗 **Live Site:** [ritunjain.dev](https://ritun.space)
 
 ---
 
