@@ -82,7 +82,7 @@ const ACHIEVEMENTS = [
         title: "Winner — SparkVerse+ 2026",
         org: "MIT Mysore",
         date: "May 2026",
-        desc: "1st place at SparkVerse+ 2026, a hackathon hosted by MIT Mysore. Built Karnataka Biosecurity Network — a full-stack AI-powered disease response platform connecting farmers, vets, and government officials across Karnataka.",
+        desc: "1st place at SparkVerse+ 2026, a ideathon hosted by MIT Mysore. Built Karnataka Biosecurity Network — a full-stack AI-powered disease response platform connecting farmers, vets, and government officials across Karnataka.",
         team: "Team AdaptX",
         badge: "🏆",
     },
